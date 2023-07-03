@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+<?xml-model href="http://sdformat.org/schemas/root.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<sdf version='1.5'>
+  <world name='default'>
+  <plugin name="mrs_gazebo_static_transform_republisher_plugin" filename="libMRSGazeboStaticTransformRepublisher.so"/>
+    
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <!-- <latitude_deg>38.540279664392635</latitude_deg> -->, 
+      <latitude_deg>38.54026098968023</latitude_deg>
+      <longitude_deg>-7.962949545159461</longitude_deg>
+      <!-- <yaw>3.14</yaw> -->
+      <!--Change lat lon here too /home/irsg/git/uav_core/ros_packages/mrs_uav_general/config/worlds/world_simulation.yaml -->
+      <world_frame_orientation>NED</world_frame_orientation>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    
+
+
+    <!-- physics engine {-->
+    <physics name="default_physics" default="0" type="ode">
+      <gravity>0 0 -9.8</gravity>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>10</iters>
+          <sor>1.3</sor>
+          <use_dynamic_moi_rescaling>0</use_dynamic_moi_rescaling>
+        </solver>
+        <constraints>
+          <cfm>0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>1000</contact_max_correcting_vel>
+          <contact_surface_layer>0.001</contact_surface_layer>
+        </constraints>
+      </ode>
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+      <magnetic_field>6.0e-06 2.3e-05 -4.2e-05</magnetic_field>
+    </physics>
+
+
+    <!-- setup shadows {-->
+    <scene>
+      <shadows>false</shadows>
+      <sky>
+        <clouds/>
+      </sky>
+    </scene>
+    <!--}--> 
+
+    <!-- sun {-->
+
+    <light name='sun' type='directional'>
+      <pose frame=''>0 0 1000 0.4 0.2 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.6 0.6 0.6 1</specular>
+      <direction>0.1 0.1 -0.9</direction>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>1</cast_shadows>
+    </light>
+
+    <!--}-->
+
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>60.948 4.2989 40.9482 0 0.443643 3.0856</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    
+    <model name='agriculture_geom'>
+      <link name='agriculture_world_link'>
+        <pose frame=''>0 0 0 0 0 1.57</pose>
+        <inertial>
+          <!-- <pose frame=''>-82.6 110.5 -1.5 0 -0 0</pose> -->
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <collision name='agriculture_world_link_collision'>
+          <pose frame=''>0 0 0 0 0 0</pose>
+          <geometry>
+          <!-- <mesh filename="model://evora_farm.dae"/> -->
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://evora_farm/evora_farm.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='agriculture_world_link_visual'>
+          <pose frame=''>0 0 0 0 0 0</pose>
+          <geometry>
+          <!-- <mesh filename="package://durable_gazebo_simulation/meshes/evora_farm.dae"/> -->
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://evora_farm/evora_farm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <static>1</static>
+      <!-- <pose frame=''>0 0 0 0 -0 0</pose> -->
+    </model>
+  </world>
+</sdf>

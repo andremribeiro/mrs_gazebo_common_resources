@@ -567,7 +567,7 @@ public:
     }
 
     depth_camera_frame_id_ = cameraNamespace + "/" + camera_name_ + camera_suffix_ + "/" + DEPTH_CAMERA_SUFFIX;
-    color_camera_frame_id_ = cameraNamespace + "/" + camera_name_ + camera_suffix_ + "/" + COLOR_CAMERA_SUFFIX;
+    color_camera_frame_id_ = cameraNamespace + "/" + camera_name_ + camera_suffix_ + "/" + DEPTH_CAMERA_SUFFIX;
     ired1_camera_frame_id_ = cameraNamespace + "/" + camera_name_ + camera_suffix_ + "/" + IRED1_CAMERA_SUFFIX;
     ired2_camera_frame_id_ = cameraNamespace + "/" + camera_name_ + camera_suffix_ + "/" + IRED2_CAMERA_SUFFIX;
     base_frame_id_         = cameraNamespace + "/" + camera_name_ + camera_suffix_ + "/" + BASE_FRAME_SUFFIX;
